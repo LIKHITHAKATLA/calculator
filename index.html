@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>simple calculator</title>
+    <style>
+        .container {
+            border: 1px solid black;
+            width: 30%;
+            height: auto;
+            padding: 20px;
+            text-align: center;
+            margin:20px auto ;
+        }
+        .input-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        input {
+            width: 40%;
+            padding: 5px;
+            text-align: center;
+        }
+        button {
+            margin: 5px;
+            padding: 8px 15px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form id="calcForm">
+            <div class="input-container">
+                <input type="number" id="inp1" placeholder="Enter 1st number">
+                <input type="number" id="inp2" placeholder="Enter 2nd number">
+                <input type="number" id="inp3" placeholder="Result" readonly>
+            </div>
+            <button type="button" id="btn1">ADD</button>
+            <button type="button" id="btn2">SUB</button>
+            <button type="button" id="btn3">MUL</button>
+            <button type="button" id="btn4">DIV</button>
+        </form>
+    </div>
+
+    <div class="container">
+        <form id="inputform">
+            <div class="input-container">
+                <input type="text" placeholder="Password" id="password">
+                <input type="text" placeholder="Comform Password" id="cpassword">
+            </div>
+            <p id="textt"></p>
+            <button type="button" id="btn12">Submit</button>
+        </form>
+    </div>
+
+    <div class="container">
+        <form id="inputformm">
+            <div class="input-container">
+                <input type="text" placeholder="Password" id="passwordd">
+            </div>
+            <p id="result"></p>
+            <button type="button" id="btnn">Check Password Strength</button>
+        </form>
+    </div>
+
+
+
+    <script>
+        //add
+        var btn1 = document.getElementById("btn1")
+        btn1.addEventListener("click",function(event){
+            event.preventDefault()
+            var inp1 = document.forms[0][0].value;
+            var inp2 = document.forms[0][1].value;
+            add = Number(inp1) + Number(inp2)
+            var inp3 = document.getElementById("inp3");
+            inp3.value = add
+            
+            
+
+        })
+        var btn2 = document.getElementById("btn2")
+        btn2.addEventListener("click",function(event){
+            event.preventDefault()
+            var inp1 = document.forms[0][0].value;
+            var inp2 = document.forms[0][1].value;
+            sub = Number(inp1) - Number(inp2)
+            var inp3 = document.getElementById("inp3");
+            inp3.value = sub
+            
+            
+
+        })
+        var btn3 = document.getElementById("btn3")
+        btn3.addEventListener("click",function(event){
+            event.preventDefault()
+            var inp1 = document.forms[0][0].value;
+            var inp2 = document.forms[0][1].value;
+            mul = Number(inp1) * Number(inp2)
+            var inp3 = document.getElementById("inp3");
+            inp3.value = mul
+            
+
+        })
+        var btn4 = document.getElementById("btn4")
+        btn4.addEventListener("click",function(event){
+            event.preventDefault()
+            var inp1 = document.forms[0][0].value;
+            var inp2 = document.forms[0][1].value;
+            div = Number(inp1) / Number(inp2)
+            var inp3 = document.getElementById("inp3");
+            inp3.value = div
+           
+        })
+
+
+
+        var btn12 = document.getElementById("btn12")
+        btn12.addEventListener("click",function(e){
+            e.preventDefault()
+            var password = document.forms[1][0].value
+            var cpassword = document.forms[1][1].value
+            var para = document.getElementById("textt")
+        
+        if(password == cpassword){
+            para.innerText="Passwords Match"
+            para.style.color="green"
+        }
+        else{
+
+            para.innerText="Passwords Not Match"
+            para.style.color="red"
+        }
+        document.forms[1][0].value=""
+        document.forms[1][1].value=""
+
+    })
+
+    var btnn = document.getElementById("btnn")
+    btnn.addEventListener("click" , function(e) {
+    e.preventDefault();
+    var passwordd = document.getElementById("passwordd").value
+    let cap = 0, small = 0, special = 0, num = 0;
+    let specialChars = "!@#$%^&*()-_=+{}[]:;<>,.?/~`";
+
+    for (let i = 0; i < passwordd.length; i++) {
+        let char = passwordd[i];
+
+        if (char >= 'A' && char <= 'Z') {
+            cap++;
+        } else if (char >= 'a' && char <= 'z') {
+            small++;
+        } else if (specialChars.includes(char)) {
+            special++;
+        } else if (!isNaN(char) && char !== ' ') {  
+            num++;
+        }
+    }
+
+    let result = document.getElementById("result");
+
+    if (cap >= 1 && small >= 1 && special >= 1 && num >= 1 && passwordd.length > 7) {
+        result.innerText = "Strong password";
+        result.style.color = "green";
+
+        console.log("Strong password");
+    } else if (small >= 1 && special >= 1 && num >= 1) {
+        result.innerText = "Medium password";
+        result.style.color = "orange";
+        console.log("Medium password");
+    } else {
+        console.log("Weak password");
+        result.innerText = "Weak password";
+        result.style.color = "red";
+    }
+    document.getElementById("passwordd").value = "";
+    })
+
+
+
+    </script>
+    
+</body>
+</html>
